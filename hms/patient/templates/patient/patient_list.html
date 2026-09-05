@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Patients</title>
+</head>
+<body>
+<h1 align="center">Hospital Management System</h1>
+<h2>Patients List</h2>
+{% for patient in patients %}
+
+<ol>
+    <li>
+        <b>Name: </b>{{patient.first_name}} {{patient.last_name}}<br>
+        <b>Age: </b>{{patient.age}}<br>
+        <b>Gender: </b>{{patient.gender}} <br>
+        <b>Blood type: </b> {{patient.blood_type}} <br>
+        <b>Date of Birth: </b> {{patient.dob}} <br>
+
+    </li>
+</ol>
+<hr>
+{% endfor %}
+</body>
+</html>
