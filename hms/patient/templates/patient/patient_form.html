@@ -6,32 +6,9 @@
 </head>
 <body>
 <h1 align="center">Patient Form</h1>
-<form method="post" align="center">
+<form method="POST" align="center">
     {% csrf_token %}
-    <hr>
-    <br>
-    <label>First name: </label>
-    <input type="text" name="first_name">
-    <br>
-    <br>
-    <label>Last name: </label>
-    <input type="text" name="last_name">
-    <br><br>
-    <label>Age: </label>
-    <input type="text" name="age">
-    <br><br>
-    <label>Gender: </label>
-    <input type="text" name="gender">
-    <br><br>
-    <label>Phone: </label>
-    <input type="text" name="phone">
-    <br><br>
-    <label>Blood group: </label>
-    <input type="text" name="blood_type">
-    <br><br>
-    <label>Date of birth: </label>
-    <input type="text" name="dob">
-    <br><br> <hr>
+    {{ form.as_p }}
     <button type="submit">Create Patient</button>
 </form>
 </body>
