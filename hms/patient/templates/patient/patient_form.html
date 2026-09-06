@@ -1,15 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Create Patient</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% block title %}
+Create Patient
+{% endblock %}
+{% block content %}
 <h1 align="center">Patient Form</h1>
 <form method="POST" align="center">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Create Patient</button>
+    <button type="submit">Submit</button>
+
 </form>
-</body>
-</html>
+
+{% endblock %}

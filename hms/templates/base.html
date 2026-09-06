@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>{% block title %}Hospital Management System{% endblock %}</title>
+</head>
+
+<body>
+
+    <header>
+        <h1 align="center">Hospital Management System</h1>
+
+        <nav>
+            <a href="{% url 'patient' %}">
+                Patients &emsp;
+            </a>
+
+            <a href="{% url 'patient_create' %}">
+                Add Patient  &emsp;
+            </a>
+        </nav>
+    </header>
+
+    <hr>
+
+    <main>
+
+        {% block content %}
+        {% endblock %}
+
+    </main>
+
+    <hr>
+
+    <footer>
+        <p>Hospital Management System</p>
+    </footer>
+
+</body>
+
+</html>

@@ -26,3 +26,22 @@ def create_patient(request):
 
     return render(request,'patient/patient_form.html',
                   {'form':form})
+
+def update_patient(request,id):
+    patient=get_object_or_404(Patient,pk=id)
+    if request.method=='POST':
+        form=PatientForm(request.POST,instance=patient)
+        if form.is_valid():
+            form.save()
+            return redirect('patient_detail', id=patient.id)
+    else:
+        form=PatientForm(instance=patient)
+    return render(request,'patient/patient_form.html',{'form':form})
+
+def delete_patient(request,id):
+    patient=get_object_or_404(Patient,pk=id)
+    if request.method=='POST':
+        patient.delete()
+        return redirect('patient')
+    else:
+        return render(request,'patient/patient_delete.html',{'patient':patient})

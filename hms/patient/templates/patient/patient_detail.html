@@ -1,17 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Patient</title>
-</head>
-<body>
-<h2>Patient Info</h2>
+{% extends "base.html" %}
+{% block title %}
+Patients Info
+{% endblock %}
+{% block content %}
+<h1>Patient Info</h1>
         <b>Name: </b>{{patient.first_name}} {{patient.last_name}}<br>
         <b>Age: </b>{{patient.age}}<br>
         <b>Gender: </b>{{patient.gender}} <br>
         <b>Blood type: </b> {{patient.blood_type}} <br>
         <b>Date of Birth: </b> {{patient.dob}} <br>
+        <b>Phone: </b> {{patient.phone}} <br>
+         <a href="{% url 'patient_update' patient.id %}">Update</a>
+        <a href="{% url 'patient_delete' patient.id %}">Delete</a><br>
+        <a href="{% url 'patient' %}">Back</a>
+
 <hr>
 
-</body>
-</html>
+{% endblock %}
