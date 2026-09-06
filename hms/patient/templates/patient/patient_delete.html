@@ -1,10 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Delete</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% block title %}
+Delete Patient
+{% endblock %}
+
+{% block content %}
 <h1>Delete Patient</h1>
 
 <p>
@@ -25,5 +24,5 @@
 <a href="{% url 'patient_detail' patient.id %}">
     Cancel
 </a>
-</body>
-</html>
+
+{% endblock %}
