@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}
+Doctors
+{% endblock %}
+
+{% block content %}
+<h1>Doctors</h1>
+<a href="{% url 'doctor_create' %}">
+    <button>Create Doctor</button>
+</a>
+<br>
+<br>
+<hr>
+
+<table border="1">
+
+    <tr>
+        <th>Name</th>
+        <th>Specialization</th>
+        <th>Phone</th>
+        <th>Department</th>
+        <th>Actions</th>
+    </tr>
+
+    {% for doctor in doctors %}
+
+    <tr>
+
+        <td>
+            {{ doctor.name }}
+        </td>
+
+        <td>
+            {{ doctor.specialization }}
+        </td>
+
+        <td>
+            {{ doctor.phone }}
+        </td>
+        <td>
+            {{doctor.department}}
+        </td>
+
+        <td>
+            <a href="{% url 'doctor_detail' doctor.id %}">
+                View
+            </a>
+
+            <a href="{% url 'doctor_update' doctor.id %}">
+                Edit
+            </a>
+
+            <a href="{% url 'doctor_delete' doctor.id %}">
+                Delete
+            </a>
+        </td>
+
+    </tr>
+
+    {% endfor %}
+
+</table>
+{% endblock %}
