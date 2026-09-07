@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from django.views.generic import ListView
+from django.urls import reverse_lazy
+from django.views.generic import ListView,DetailView,DeleteView,UpdateView,CreateView
 
 from patient.forms import PatientForm
 from patient.models import Patient
@@ -12,37 +13,24 @@ class PatientListView(ListView):
     model = Patient
     context_object_name = 'patients'
     template_name = 'patient/patient_list.html'
-def patient_detail(request, id):
-    patient=get_object_or_404(Patient,pk=id)
-    return render(request,'patient/patient_detail.html',{'patient':patient})
+class PatientDetailView(DetailView):
+    model=Patient
+    context_object_name='patient'
+    template_name = 'patient/patient_detail.html'
+class PatientCreateView(CreateView):
+    model=Patient
+    form_class=PatientForm
+    template_name='patient/patient_form.html'
+    success_url=reverse_lazy('patient')
 
-def create_patient(request):
-    if request.method=='POST':
-        form=PatientForm(request.POST)
-        if form.is_valid():
-            patient=form.save()
-            return redirect('patient_detail', id=patient.id)
-    else:
-        form = PatientForm()
+class PatientUpdateView(UpdateView):
+    model=Patient
+    form_class=PatientForm
+    template_name='patient/patient_form.html'
+    success_url=reverse_lazy('patient')
 
-    return render(request,'patient/patient_form.html',
-                  {'form':form})
-
-def update_patient(request,id):
-    patient=get_object_or_404(Patient,pk=id)
-    if request.method=='POST':
-        form=PatientForm(request.POST,instance=patient)
-        if form.is_valid():
-            form.save()
-            return redirect('patient_detail', id=patient.id)
-    else:
-        form=PatientForm(instance=patient)
-    return render(request,'patient/patient_form.html',{'form':form})
-
-def delete_patient(request,id):
-    patient=get_object_or_404(Patient,pk=id)
-    if request.method=='POST':
-        patient.delete()
-        return redirect('patient')
-    else:
-        return render(request,'patient/patient_delete.html',{'patient':patient})
+class PatientDeleteView(DeleteView):
+    model=Patient
+    context_object_name='patient'
+    template_name='patient/patient_delete.html'
+    success_url=reverse_lazy('patient')

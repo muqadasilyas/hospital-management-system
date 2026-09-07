@@ -28,5 +28,5 @@ class PatientForm(forms.ModelForm):
         blood_type = self.cleaned_data['blood_type']
         blood_groups=['A+','A-','B+','B-','AB+','AB-','AB','O+','O-','O']
         if blood_type not in blood_groups:
-            raise forms.ValidationError('Blood type must be one of ' + blood_groups)
+            raise forms.ValidationError('Blood type must be one of ' + ",".join(blood_groups))
         return blood_type
