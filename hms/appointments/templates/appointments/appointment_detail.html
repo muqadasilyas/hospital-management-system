@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}
+Appointments Info
+{% endblock %}
+
+{% block content %}
+<h1>Appointment Info</h1>
+        <b>Appointment Date: </b>{{appointment.appointment_date}} <br>
+        <b>Appointment Time: </b>{{appointment.appointment_time}}<br>
+        <b>Reason: </b>{{appointment.reason}} <br>
+        <b>Status: </b> {{appointment.status}} <br>
+        <b>Patient: </b> {{appointment.patient}} <br>
+        <b>Doctor: </b> {{appointment.doctor}} <br>
+
+         <a href="{% url 'appointment_update' appointment.id %}">Update</a>
+        <a href="{% url 'appointment_delete' appointment.id %}">Delete</a><br>
+        <a href="{% url 'appointment_list' %}">Back</a>
+
+<hr>
+{% endblock %}

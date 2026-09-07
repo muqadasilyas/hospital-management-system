@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block title %}
+Appointments
+{% endblock %}
+
+{% block content %}
+<h1>Appointments</h1>
+<a href="{% url 'appointment_create' %}">
+    <button>Create Appointment</button>
+</a>
+<br>
+<br>
+<hr>
+
+<table border="1">
+
+    <tr>
+        <th>Appointment Date</th>
+        <th>Appointment Time</th>
+        <th>Reason</th>
+        <th>Status</th>
+        <th>Created at</th>
+        <th>Doctor</th>
+        <th>Patient</th>
+        <th>Actions</th>
+    </tr>
+
+    {% for appointment in appointments %}
+
+    <tr>
+
+        <td>
+            {{ appointment.appointment_date }}
+        </td>
+
+        <td>
+            {{ appointment.appointment_time }}
+        </td>
+
+        <td>
+            {{ appointment.reason }}
+        </td>
+        <td>
+            {{appointment.status}}
+        </td>
+        <td>
+            {{appointment.created_at}}
+        </td>
+        <td>
+            {{appointment.doctor}}
+        </td>
+        <td>
+            {{appointment.patient}}
+        </td>
+
+        <td>
+            <a href="{% url 'appointment_detail' appointment.id %}">
+                View
+            </a>
+
+            <a href="{% url 'appointment_update' appointment.id %}">
+                Edit
+            </a>
+
+            <a href="{% url 'appointment_delete' appointment.id %}">
+                Delete
+            </a>
+        </td>
+
+    </tr>
+
+    {% endfor %}
+
+</table>
+{% endblock %}
