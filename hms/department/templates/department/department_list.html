@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}
+Departments
+{% endblock %}
+
+{% block content %}
+<h1>Departments</h1>
+<a href="{% url 'department_create' %}">
+    <button>Create Department</button>
+</a>
+<br>
+<br>
+<hr>
+
+<table border="1">
+
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Actions</th>
+    </tr>
+
+    {% for department in departments %}
+
+    <tr>
+
+        <td>
+            {{ department.department_name }}
+        </td>
+
+        <td>
+            {{ department.department_description }}
+        </td>
+
+        <td>
+            <a href="{% url 'department_detail' department.id %}">
+                View
+            </a>
+
+            <a href="{% url 'department_update' department.id %}">
+                Edit
+            </a>
+
+            <a href="{% url 'department_delete' department.id %}">
+                Delete
+            </a>
+        </td>
+
+    </tr>
+
+    {% endfor %}
+
+</table>
+{% endblock %}

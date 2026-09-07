@@ -17,8 +17,3 @@ class DoctorForm(forms.ModelForm):
         if not phone.isdigit():
             raise forms.ValidationError('Phone number must be digital')
         return phone
-    def clean_specialization(self):
-        specialization = self.cleaned_data['specialization']
-        if not specialization.isalpha():
-            raise forms.ValidationError('Specialization must be alphabetical')
-        return specialization

@@ -1,15 +1,15 @@
 {% extends "base.html" %}
 
 {% block title %}
-Delete Doctor
+Delete Department
 {% endblock %}
 
 {% block content %}
-<h1>Delete Doctor</h1>
+<h1>Delete Department</h1>
 
 <p>
     Are you sure you want to delete
-    {{ doctor.first_name }} {{ doctor.last_name }}?
+    {{ department.department_name }} ?
 </p>
 
 <form method="POST">
@@ -22,7 +22,7 @@ Delete Doctor
 
 </form>
 <br>
-<a href="{% url 'doctor_list' %}">
+<a href="{% url 'department_list' %}">
     Cancel
 </a>
 {% endblock %}
