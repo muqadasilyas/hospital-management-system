@@ -6,5 +6,5 @@ from appointments.models import Appointments
 class AppointmentForm(forms.ModelForm):
     class Meta:
         model=Appointments
-        fields="__all__"
-
+        fields=["reason","status","doctor","patient"]
+        read_only_fields=("appointment_date","appointment_time","created_at")

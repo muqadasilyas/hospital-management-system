@@ -4,8 +4,8 @@ from patient.models import Patient
 # Create your models here.
 class Appointments(models.Model):
     id = models.AutoField(primary_key=True)
-    appointment_date = models.DateField()
-    appointment_time = models.TimeField()
+    appointment_date = models.DateField(auto_now_add=True)
+    appointment_time = models.TimeField(auto_now_add=True)
     reason = models.TextField()
     status = models.BooleanField()
     created_at = models.DateTimeField(auto_now_add=True)

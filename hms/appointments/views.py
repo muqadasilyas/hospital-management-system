@@ -14,6 +14,9 @@ class AppointmentListView(ListView):
     context_object_name='appointments'
     template_name = 'appointments/appointment_list.html'
 
+    def queryset(self):
+        return Appointments.objects.order_by('-appointment_date')
+
 class AppointmentCreateView(CreateView):
     model=Appointments
     form_class = AppointmentForm
@@ -39,3 +42,19 @@ class AppointmentDeleteView(DeleteView):
     template_name = 'appointments/appointment_delete.html'
     success_url = reverse_lazy('appointment_list')
 
+class DoctorAppointmentListView(ListView):
+    model=Appointments
+    context_object_name='appointments'
+    template_name = 'appointments/appointment_list.html'
+
+    def queryset(self):
+        doctor_id=self.kwargs['doctor_id']
+        return Appointments.objects.filter(doctor_id=doctor_id).order_by('-appointment_date')
+
+class PatientAppointmentListView(ListView):
+    model=Appointments
+    context_object_name='appointments'
+    template_name = 'appointments/appointment_list.html'
+    def queryset(self):
+        patient_id=self.kwargs['patient_id']
+        return Appointments.objects.filter(patient_id=patient_id).order_by('-appointment_date')

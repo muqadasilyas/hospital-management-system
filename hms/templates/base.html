@@ -7,9 +7,16 @@
 
 <body>
 
-    <header>
+    <header align = "center">
         <h1 align="center">Hospital Management System</h1>
+         {% if user.is_authenticated %}
+            <p align="center">Welcome, {{ user.username }}</p>
+            <button>
+                 <a href="{% url 'logout' %}">Logout</a>
+            </button><br><br>
 
+
+         {% endif %}
         <nav>
             <a href="{% url 'patient' %}">
                 Patients &emsp;
@@ -19,10 +26,10 @@
                 Doctor  &emsp;
             </a>
             <a href="{% url 'department_list' %}">
-                Department
+                Department  &emsp;
             </a>
-            <a href="{% url 'department_list' %}">
-                Department
+            <a href="{% url 'appointment_list' %}">
+                Appointments
             </a>
         </nav>
     </header>
