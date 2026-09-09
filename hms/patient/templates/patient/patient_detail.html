@@ -3,6 +3,9 @@
 Patients Info
 {% endblock %}
 {% block content %}
+{% if not user.is_authenticated %}
+<p>User not authorized/ authenticated here</p>
+{% endif %}
 <h1>Patient Info</h1>
         <b>Name: </b>{{patient.first_name}} {{patient.last_name}}<br>
         <b>Age: </b>{{age}}<br>

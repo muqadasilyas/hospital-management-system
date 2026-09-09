@@ -83,3 +83,7 @@ class AppointmentCompleteView(LoginRequiredMixin,PermissionRequiredMixin,UpdateV
         if user.groups.filter(name='Doctors').exists():
             return Appointments.objects.filter(doctor=user.doctor)
         return Appointments.objects.none()
+
+    def form_valid(self, form):
+        form.instance.status = "COMPLETED"
+        return super().form_valid(form)

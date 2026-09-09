@@ -53,17 +53,19 @@ class PatientDetailView(LoginRequiredMixin,DetailView):
             age-=1
         context['age']=age
         return context
-class PatientCreateView(LoginRequiredMixin,CreateView):
+class PatientCreateView(LoginRequiredMixin,PermissionRequiredMixin,CreateView):
     model=Patient
     form_class=PatientForm
     template_name='patient/patient_form.html'
     success_url=reverse_lazy('patient')
+    permission_required = "patient.add_patient"
 
-class PatientUpdateView(LoginRequiredMixin,UpdateView):
+class PatientUpdateView(LoginRequiredMixin,PermissionRequiredMixin,UpdateView):
     model=Patient
     form_class=PatientForm
     template_name='patient/patient_form.html'
     success_url=reverse_lazy('patient')
+    permission_required = "patient.change_patient"
 
 class PatientDeleteView(LoginRequiredMixin,PermissionRequiredMixin,DeleteView):
     model=Patient
