@@ -53,17 +53,21 @@ Patients
             {{patient.blood_type}}
         </td>
         <td>
+            {% if perms.patient.view_patient %}
             <a href="{% url 'patient_detail' patient.id %}">
                 View
             </a>
-
+            {% endif %}
+            {% if perms.patient.change_patient %}
             <a href="{% url 'patient_update' patient.id %}">
                 Edit
             </a>
-
+            {% endif %}
+            {% if perms.patient.delete_patient %}
             <a href="{% url 'patient_delete' patient.id %}">
                 Delete
             </a>
+            {% endif %}
         </td>
 
     </tr>

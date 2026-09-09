@@ -12,5 +12,9 @@ class Appointments(models.Model):
     doctor = models.ForeignKey(Doctor,on_delete=models.CASCADE)
     patient = models.ForeignKey(Patient,on_delete=models.CASCADE)
 
+    class Meta:
+        permissions = [
+            ("complete_appointment", "Can complete appointment"),
+        ]
     def __str__(self):
         return self.reason

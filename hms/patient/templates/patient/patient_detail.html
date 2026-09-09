@@ -11,8 +11,12 @@ Patients Info
         <b>Blood type: </b> {{patient.blood_type}} <br>
         <b>Date of Birth: </b> {{patient.dob}} <br>
         <b>Phone: </b> {{patient.phone}} <br>
+        {% if perms.patient.change_patient %}
          <a href="{% url 'patient_update' patient.id %}">Update</a>
+        {% endif %}
+        {% if perms.patient.delete_patient %}
         <a href="{% url 'patient_delete' patient.id %}">Delete</a><br>
+        {% endif %}
         <a href="{% url 'patient' %}">Back</a>
 
 <hr>
