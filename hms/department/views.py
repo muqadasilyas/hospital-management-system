@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
@@ -8,30 +9,33 @@ from department.models import Department
 
 # Create your views here.
 
-class DepartmentListView(ListView):
+class DepartmentListView(LoginRequiredMixin,ListView):
     model = Department
     context_object_name = 'departments'
     template_name = 'department/department_list.html'
 
-class DepartmentDetailView(DetailView):
+class DepartmentDetailView(LoginRequiredMixin,DetailView):
     model = Department
     context_object_name = 'department'
     template_name = 'department/department_detail.html'
 
-class DepartmentCreateView(CreateView):
+class DepartmentCreateView(LoginRequiredMixin,PermissionRequiredMixin,CreateView):
     model = Department
     template_name = 'department/department_form.html'
     form_class = DepartmentForm
     success_url = reverse_lazy('department_list')
+    permission_required = "department.add_department"
 
-class DepartmentUpdateView(UpdateView):
+class DepartmentUpdateView(LoginRequiredMixin,PermissionRequiredMixin,UpdateView):
     model = Department
     form_class = DepartmentForm
     template_name = 'department/department_form.html'
     success_url = reverse_lazy('department_list')
+    permission_required = "department.change_department"
 
-class DepartmentDeleteView(DeleteView):
+class DepartmentDeleteView(LoginRequiredMixin,PermissionRequiredMixin,DeleteView):
     model = Department
     context_object_name = 'department'
     template_name = 'department/department_delete.html'
     success_url = reverse_lazy('department_list')
+    permission_required = "department.delete_department"
