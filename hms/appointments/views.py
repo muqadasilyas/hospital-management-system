@@ -33,7 +33,7 @@ class AppointmentCreateView(LoginRequiredMixin,PermissionRequiredMixin,CreateVie
     form_class = AppointmentForm
     template_name = 'appointments/appointment_form.html'
     success_url = reverse_lazy('appointment_list')
-    permission_required = "appointments.create_appointments"
+    permission_required = "appointments.add_appointments"
 
 class AppointmentDetailView(LoginRequiredMixin,DetailView):
     model=Appointments
@@ -83,7 +83,7 @@ class PatientAppointmentListView(LoginRequiredMixin,ListView):
 
 class AppointmentCompleteView(LoginRequiredMixin,PermissionRequiredMixin,UpdateView):
     model=Appointments
-    permission_required = "appointments.complete_appointments"
+    permission_required = "appointments.complete_appointment"
 
     def get_queryset(self):
         user=self.request.user

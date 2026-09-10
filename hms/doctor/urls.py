@@ -7,5 +7,5 @@ urlpatterns = [
     path('<int:pk>/',views.DoctorDetailView.as_view(), name='doctor_detail'),
     path('<int:pk>/edit/',views.DoctorUpdateView.as_view(), name='doctor_update'),
     path('<int:pk>/delete/',views.DoctorDeleteView.as_view(), name='doctor_delete'),
-    path('patients/',views.DoctorCreateView.as_view(), name='doctor_create'),
+    path('create/',views.DoctorCreateView.as_view(), name='doctor_create'),
 ]

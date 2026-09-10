@@ -4,10 +4,15 @@ from patient.models import Patient
 # Create your models here.
 class Appointments(models.Model):
     id = models.AutoField(primary_key=True)
-    appointment_date = models.DateField(auto_now_add=True)
-    appointment_time = models.TimeField(auto_now_add=True)
+    appointment_date = models.DateField()
+    appointment_time = models.TimeField()
     reason = models.TextField()
-    status = models.BooleanField()
+    status_choices={
+        "P":"Pending",
+        "R":"Rejected",
+        "C":"Completed",
+    }
+    status = models.CharField(max_length=1,choices=status_choices)
     created_at = models.DateTimeField(auto_now_add=True)
     doctor = models.ForeignKey(Doctor,on_delete=models.CASCADE)
     patient = models.ForeignKey(Patient,on_delete=models.CASCADE)
