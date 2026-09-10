@@ -46,14 +46,17 @@ Doctors
             <a href="{% url 'doctor_detail' doctor.id %}">
                 View
             </a>
+            {% if perms.doctor.change_doctor %}
 
             <a href="{% url 'doctor_update' doctor.id %}">
                 Edit
             </a>
-
+            {% endif %}
+            {% if perms.doctor.delete_doctor %}
             <a href="{% url 'doctor_delete' doctor.id %}">
                 Delete
             </a>
+            {% endif %}
         </td>
 
     </tr>

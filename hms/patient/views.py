@@ -6,6 +6,8 @@ from django.http import HttpResponse, HttpRequest
 from django.urls import reverse_lazy
 from django.views.generic import ListView,DetailView,DeleteView,UpdateView,CreateView
 from datetime import date
+
+import patient
 from patient.forms import PatientForm
 from patient.models import Patient
 from django.shortcuts import get_object_or_404
@@ -22,7 +24,19 @@ class PatientListView(LoginRequiredMixin,ListView):
         print("Authenticated: ",request.user.is_authenticated)
         return super().get(request, *args, **kwargs)
     def get_queryset(self):
-        patients = Patient.objects.all()
+        user=self.request.user
+        if user.is_superuser:
+            patients = Patient.objects.all()
+        elif user.groups.filter(name='Doctors').exists():
+            patients = Patient.objects.filter(appointments__doctor=user.doctor).distinct()
+
+        elif user.groups.filter(name='Patient').exists():
+            patients = Patient.objects.filter(id=user.patient.id)
+
+        else:
+            patients = Patient.objects.none()
+
+
 
         today = date.today()
 

@@ -10,8 +10,13 @@ Doctor Info
         <b>Specialization: </b>{{doctor.specialization}}<br>
         <b>Phone: </b>{{doctor.phone}} <br>
         <b>Department: </b> {{doctor.department}} <br>
+        {% if perms.doctor.change_doctor %}
          <a href="{% url 'doctor_update' doctor.id %}">Update</a>
+        {% endif %}
+        {% if perms.doctor.delete_doctor %}
         <a href="{% url 'doctor_delete' doctor.id %}">Delete</a><br>
+        {% endif %}
+
         <a href="{% url 'doctor_list' %}">Back</a>
 
 <hr>

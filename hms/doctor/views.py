@@ -1,7 +1,9 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.db.models import QuerySet
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView,DeleteView,CreateView,UpdateView,DetailView
+
 from doctor.forms import DoctorForm
 from doctor.models import Doctor
 
@@ -12,7 +14,16 @@ class DoctorListView(LoginRequiredMixin,ListView):
     model = Doctor
     context_object_name = 'doctors'
     template_name = 'doctor/doctor_list.html'
-
+    def get_queryset(self):
+        user=self.request.user
+        if user.is_superuser:
+            return Doctor.objects.all()
+        elif user.groups.filter(name="Doctors").exists():
+            return Doctor.objects.filter(id=user.doctor.id)
+        elif user.groups.filter(name="Patient").exists():
+            return Doctor.objects.filter(appointments__patient=user.patient.id)
+        else:
+            return Doctor.objects.none()
 
 class DoctorDetailView(LoginRequiredMixin,DetailView):
     model = Doctor
