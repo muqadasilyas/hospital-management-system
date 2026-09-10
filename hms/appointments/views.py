@@ -94,5 +94,5 @@ class AppointmentCompleteView(LoginRequiredMixin,PermissionRequiredMixin,UpdateV
         return Appointments.objects.none()
 
     def form_valid(self, form):
-        form.instance.status = "COMPLETED"
+        form.instance.status = "C"
         return super().form_valid(form)
