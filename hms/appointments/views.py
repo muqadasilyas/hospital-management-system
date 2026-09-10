@@ -11,7 +11,7 @@ from doctor.models import Doctor
 
 # Create your views here.
 
-class AppointmentListView(LoginRequiredMixin,ListView):
+class AppointmentListView(LoginRequiredMixin,PermissionRequiredMixin,ListView):
     model=Appointments
     context_object_name='appointments'
     template_name = 'appointments/appointment_list.html'
@@ -23,17 +23,19 @@ class AppointmentListView(LoginRequiredMixin,ListView):
         if user.groups.filter(name='Doctors').exists():
             return Appointments.objects.filter(doctor=user.doctor).order_by('-appointment_date')
         return Appointments.objects.none()
-class AppointmentCreateView(CreateView):
+class AppointmentCreateView(LoginRequiredMixin,PermissionRequiredMixin,CreateView):
     model=Appointments
     form_class = AppointmentForm
     template_name = 'appointments/appointment_form.html'
     success_url = reverse_lazy('appointment_list')
+    permission_required = "appointments.create_appointment"
 
-class AppointmentDetailView(DetailView):
+class AppointmentDetailView(LoginRequiredMixin,PermissionRequiredMixin,DetailView):
     model=Appointments
     context_object_name='appointment'
     template_name = 'appointments/appointment_detail.html'
     success_url = reverse_lazy('appointment_list')
+    permission_required = "appointments.view_appointment"
     def get_queryset(self):
         user=self.request.user
         if user.is_superuser:
@@ -42,29 +44,30 @@ class AppointmentDetailView(DetailView):
             return Appointments.objects.filter(doctor=user.doctor).order_by('-appointment_date')
         return Appointments.objects.none()
 
-class AppointmentUpdateView(UpdateView):
+class AppointmentUpdateView(LoginRequiredMixin,PermissionRequiredMixin,UpdateView):
     model=Appointments
     context_object_name='appointment'
     form_class = AppointmentForm
     template_name = 'appointments/appointment_form.html'
     success_url = reverse_lazy('appointment_list')
+    permission_required = "appointments.change_appointment"
 
-class AppointmentDeleteView(DeleteView):
+class AppointmentDeleteView(LoginRequiredMixin,PermissionRequiredMixin,DeleteView):
     model=Appointments
     context_object_name='appointment'
     template_name = 'appointments/appointment_delete.html'
     success_url = reverse_lazy('appointment_list')
+    permission_required = "appointments.delete_appointment"
 
-class DoctorAppointmentListView(ListView):
+class DoctorAppointmentListView(LoginRequiredMixin,ListView):
     model=Appointments
     context_object_name='appointments'
     template_name = 'appointments/appointment_list.html'
-
     def get_queryset(self):
         doctor_id=self.kwargs['doctor_id']
         return Appointments.objects.filter(doctor_id=doctor_id).order_by('-appointment_date')
 
-class PatientAppointmentListView(ListView):
+class PatientAppointmentListView(LoginRequiredMixin,ListView):
     model=Appointments
     context_object_name='appointments'
     template_name = 'appointments/appointment_list.html'
