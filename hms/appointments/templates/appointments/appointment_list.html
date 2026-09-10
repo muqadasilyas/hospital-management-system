@@ -58,14 +58,16 @@ Appointments
             <a href="{% url 'appointment_detail' appointment.id %}">
                 View
             </a>
-
+            {% if perms.appointments.change_appointments %}
             <a href="{% url 'appointment_update' appointment.id %}">
                 Edit
             </a>
-
+            {% endif %}
+            {% if perms.appointments.delete_appointments %}
             <a href="{% url 'appointment_delete' appointment.id %}">
                 Delete
             </a>
+            {% endif %}
         </td>
 
     </tr>

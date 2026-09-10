@@ -12,9 +12,12 @@ Appointments Info
         <b>Status: </b> {{appointment.status}} <br>
         <b>Patient: </b> {{appointment.patient}} <br>
         <b>Doctor: </b> {{appointment.doctor}} <br>
-
+        {% if perms.appointment.change_appointment %}
          <a href="{% url 'appointment_update' appointment.id %}">Update</a>
+        {% endif %}
+        {% if perms.appointment.delete_appointment %}
         <a href="{% url 'appointment_delete' appointment.id %}">Delete</a><br>
+        {% endif %}
         <a href="{% url 'appointment_list' %}">Back</a>
 
 <hr>

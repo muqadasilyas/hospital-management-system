@@ -22,6 +22,8 @@ class DoctorListView(LoginRequiredMixin,ListView):
             return Doctor.objects.filter(id=user.doctor.id)
         elif user.groups.filter(name="Patient").exists():
             return Doctor.objects.filter(appointments__patient=user.patient.id)
+        elif user.groups.filter(name="Receptionist").exists():
+            return Doctor.objects.all()
         else:
             return Doctor.objects.none()
 

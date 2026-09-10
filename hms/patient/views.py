@@ -32,7 +32,8 @@ class PatientListView(LoginRequiredMixin,ListView):
 
         elif user.groups.filter(name='Patient').exists():
             patients = Patient.objects.filter(id=user.patient.id)
-
+        elif user.groups.filter(name="Receptionist").exists():
+            patients = Patient.objects.all()
         else:
             patients = Patient.objects.none()
 
