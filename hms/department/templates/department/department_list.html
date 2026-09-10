@@ -34,17 +34,21 @@ Departments
         </td>
 
         <td>
+
+
             <a href="{% url 'department_detail' department.id %}">
                 View
             </a>
-
+            {% if perms.department.change_department %}
             <a href="{% url 'department_update' department.id %}">
                 Edit
             </a>
-
+            {% endif %}
+            {% if perms.department.delete_department %}
             <a href="{% url 'department_delete' department.id %}">
                 Delete
             </a>
+            {% endif %}
         </td>
 
     </tr>

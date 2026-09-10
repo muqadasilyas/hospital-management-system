@@ -9,8 +9,12 @@ Department
         <b>Name: </b>{{department.department_name}}<br>
         <b>Description: </b>{{department.department_description}}<br>
 <br>
+         {% if perms.department.change_department %}
          <a href="{% url 'department_update' department.id %}">Update</a>
+         {% endif %}
+         {% if perms.department.delete_department %}
         <a href="{% url 'department_delete' department.id %}">Delete</a><br>
+         {% endif %}
 <br>
         <a href="{% url 'department_list' %}">Back</a>
 
