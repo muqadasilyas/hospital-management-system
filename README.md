@@ -2,8 +2,6 @@
 
 A Django-based hospital management system with role-based access for Admins, Doctors, Patients, and Receptionists — patient records, doctor–department assignments, and appointment scheduling with status tracking, all in one place.
 
-**Repo:** [github.com/muqadasilyas/hospital-management-system](https://github.com/muqadasilyas/hospital-management-system)
-
 ## ✨ Features
 
 - 🧑‍⚕️ **Patients** — first/last name, gender, blood type, date of birth, phone; each patient is optionally linked to a Django `User` account
